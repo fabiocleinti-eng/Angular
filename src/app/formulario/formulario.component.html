@@ -1,8 +1,51 @@
-<div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-  </div>
-  <div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div class="card shadow" style="width: 22rem;">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4">Tecnologia Web 3</h3>
+            <h5 class="text-center">Criação de usuário</h5>
+            <hr />
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">
+                         Entre com o seu nome:</label>
+                    <input type="text" class="form-control" id="nome" 
+                         placeholder="Digite seu nome"
+                         formControlName="nome">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">
+                         Entre com o seu email:</label>
+                    <input type="email" class="form-control" id="email" 
+                            placeholder="Digite seu email" required
+                            formControlName="email">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">
+                          Entre com a sua senha:</label>
+                    <input type="password" class="form-control" 
+                           id="password" 
+                           placeholder="Digite sua senha" required
+                           formControlName="senha" (input)="validatePassword()">
+                </div>
+                <div class="mb-3">
+                    <label for="password-confirm" class="form-label">
+                           Confirme a sua senha:</label>
+                    <input type="password" class="form-control" 
+                           id="password-confirm" 
+                           placeholder="Confirme sua senha"
+                        required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success">
+                            Cadastrar</button>
+                </div>
+                <div class="d-grid mt-2">
+                    <a routerLink="/autenticar-usuario" 
+                         class="btn btn-secondary">
+                        Já possui conta? Acesse aqui!
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
