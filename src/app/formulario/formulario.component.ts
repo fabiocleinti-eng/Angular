@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -8,7 +9,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
@@ -73,10 +75,12 @@ export class FormularioComponent {
   //capturar do evento submit
   onSubmit() {
     if (this.form.valid) {
-    console.log('Formulário válido:', this.form.value);
-  } else {
-    console.log('Formulário Inválido!', this.form.value);
-  }
+      alert("Formulário Válido");
+      console.log('Formulário válido:', this.form.value);
+    } else {
+      alert("Formulário Inválido");
+      console.log('Formulário Inválido!', this.form.value);
+    }
   }
 
   // Método para verificar se o formulário é válido

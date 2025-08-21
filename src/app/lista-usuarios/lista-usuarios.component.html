@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Usuários ({{ totalUsers() }})</h2>
+
+  <button class="btn btn-sm btn-primary mb-3" (click)="fetchUsers()">
+    Recarregar
+  </button>
+
+  <div *ngIf="loading()" class="alert alert-info" role="alert">
+    Carregando usuários...
+  </div>
+
+  <div *ngIf="error()" class="alert alert-danger" role="alert">
+    {{ error() }}
+  </div>
+
+  <div *ngIf="!loading() && !error()">
+    <table class="table table-striped table-hover table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Usuário</th>
+          <th>Email</th>
+          <th>Cidade</th>
+          <th>Empresa</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of users(); trackBy: trackById">
+          <td>{{ u.id }}</td>
+          <td>{{ u.name }}</td>
+          <td>{{ u.username }}</td>
+          <td>
+            <a [href]="'mailto:' + u.email">{{ u.email }}</a>
+          </td>
+          <td>{{ u.address.city }}</td>
+          <td>{{ u.company.name }}</td>
+          <td>
+            <a [href]="'https://' + u.website" target="_blank" rel="noopener">
+              {{ u.website }}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
