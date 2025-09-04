@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
 import { NgModule } from '@angular/core';
+import { Endereco } from '../models/endereco.model';
+import { EnderecoService } from '../services/endereco.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario',
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -38,8 +42,20 @@ export class FormularioComponent {
     nome : new FormControl(''), //campo 'nome'
     email : new FormControl('', [Validators.required, Validators.pattern(this.emailRegex)]), //campo 'email'
     senha : new FormControl('', [Validators.required, Validators.pattern(this.passwordRegex)]), //campo 'senha'
-    verificaSenha: new FormControl('')
+    verificaSenha: new FormControl(''),
+    cep: new FormControl(''),
+    logradouro: new FormControl({value:'', disabled: true})
   });
+
+  private enderecoService = inject(EnderecoService);
+  get carregarEndereco(){
+    const cep = this.form.get('cep')?.value ?? '';
+    this.enderecoService.getEndereco(cep).subscribe(endereco =>{
+      this.form.get('logradouro')?.setValue(endereco.logradouro);
+    });
+
+    return true;
+  }
 
   // Método de validação da senha
   validatePassword() {
