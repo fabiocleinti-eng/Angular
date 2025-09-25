@@ -1,17 +1,23 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 shadow-lg" style="width: 400px;">
             <h3 class="text-center mb-4">Login</h3>
-            <form>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <!-- Campo de E-mail -->
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+                    <input type="email" class="form-control" formControlName="email" id="email" placeholder="Digite seu e-mail" required>
+                    <small *ngIf="form.controls.email.touched && form.controls.email.invalid">
+                        Informe um email válido
+                    </small>
                 </div>
                 
                 <!-- Campo de Senha -->
                 <div class="mb-3">
                     <label for="senha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="senha" placeholder="Digite sua senha" required>
+                    <input type="password" class="form-control" formControlName="senha" id="senha" placeholder="Digite sua senha" required>
+                    <small *ngIf="form.controls.senha.touched && form.controls.senha.invalid">
+                        Senha é obrigatória.
+                    </small>
                 </div>
 
                 <!-- Botão de Enviar -->
