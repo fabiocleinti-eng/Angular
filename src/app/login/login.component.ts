@@ -41,7 +41,7 @@ export class LoginComponent {
         return;
       }
       var token = await this.authService.login({email, senha});
-      this.router.navigate(['/lista-usuarios']);
+      alert('Login realizado com sucesso. Token: ' + token);
     }catch(err:any){
       this.error.set(err.message || 'Erro ao realizar login');
     }finally{
